@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Homepage</a></li>
-                <li><a href="/about.html">About</a></li>
-                <li><a href="/login.html">Login</a></li>
-                <li><a href="https://google.com">Google</a></li>
+    <!-- This is an A11y Change : added roles for header, nav, footer -->
+    <header role="banner">
+        <nav role="navigation">
+            <ul class="ultop">
+                <!-- This is an A11y Change : added skip to content -->
+                <a href="#main-content" class="skip-to-content">Skip to content</a>
+                <li><a href="/" aria-label="Go to Homepage">Homepage</a></li>
+                <li><a href="/about.html" aria-label="Learn more About us">About</a></li>
+                <li><a href="/login.html" aria-label="Login to your account">Login</a></li>
+                <li><a href="https://google.com" aria-label="Visit Google">Google</a></li>
             </ul>
         </nav>
     </header>
@@ -25,7 +27,7 @@
         <h2>A personal-budget management app</h2>
     </div>
 
-    <div class="container center">
+    <div class="container center" id="main-content">
 
         <section class="page-area">
 
@@ -97,7 +99,7 @@
 
     </div>
 
-    <footer class="bottom">
+    <footer role="contentinfo" class="bottom">
         <div class="center">
             All rights reserved &copy; Nikshitha Reddy Aella
         </div>

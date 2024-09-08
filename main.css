@@ -1,3 +1,27 @@
+/* This is an A11y Change: Skip to content link */
+.skip-to-content {
+    position: static;
+    top: auto;
+    left: 1px;;
+    background-color: white;
+    color: blue;
+    padding-right: 300px;
+    z-index: 100;
+    text-decoration: none;
+    font-size: 20px;
+    overflow: hidden;
+
+}
+
+/* Show skip link when focused */
+.skip-to-content:focus {
+    top: 10px; /* Add 'px' to top value */
+        position: static;
+        width: auto;
+        height: auto;
+}
+
+
 * {
     box-sizing: border-box;
 }
@@ -13,23 +37,29 @@ div.menu {
     height: 44px;
     padding: 0 40px;
 }
-
+/* This is an A11y change: making nav bar from list to horizontal alignment, increased font size*/
+.ultop li{
+    display: inline-block;
+    font-size: 20px; 
+    padding: 20px;
+}
 div.menu ul,
 div.menu ul li {
     margin: 0;
-    padding: 0 ;
+    padding-left: 10px;
     list-style: none;
     display: inline-block;
 }
 
 div.menu ul li a {
-    display: block;
-    padding: 0 20px;
+  /*  display: block;*/
+    padding: 0 40px;
     line-height: 44px;
     font-size: 1.4em;
     text-decoration: none;
     color: #fff;
     margin: 0;
+    
 }
 
 div.menu ul li a:hover  {
