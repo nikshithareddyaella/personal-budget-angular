@@ -11,18 +11,21 @@
     <link rel="stylesheet" href="/main.css">
 </head>
 <body>
-    <!-- This is a Semantic HTML Change : Added header and nav -->
+     <!-- This is an A11y Change : added skip to content -->
+     <a href="#main-content" class="skip-to-content">Skip to content</a>
+
+    <!-- This is a Semantic HTML Change : changed from div to header and nav -->
     <!-- This is an A11y Change : added roles for header, nav, footer -->
     <header role="banner">
-        <nav role="navigation">
+        <nav role="navigation"> 
+            <div class="menu"> 
             <ul class="ultop">
-                <!-- This is an A11y Change : added skip to content -->
-                <a href="#main-content" class="skip-to-content">Skip to content</a>
                 <li><a href="/" aria-label="Go to Homepage">Homepage</a></li>
                 <li><a href="/about.html" aria-label="Learn more About us">About</a></li>
                 <li><a href="/login.html" aria-label="Login to your account">Login</a></li>
                 <li><a href="https://google.com" aria-label="Visit Google">Google</a></li>
             </ul>
+            </div>
         </nav>
     </header>
     <!-- This is a SEO Change : Heading Tag Hierarchy -->
@@ -30,16 +33,13 @@
         <h1>Personal Budget Management App</h1>
         <h2>Track Your Expenses</h2>
         <h2>Stay on Budget</h2>
-
     </div>
 
     <div class="container center" id="main-content">
         
         <!-- This is a Semantic HTML Change : change from div to section tag -->
         <section class="page-area">
-            
-             <!-- This is a Semantic HTML Change : change from div to article tag -->
-            <article class="text-box">
+            <div class="text-box">
                 <!-- This is a SEO Change : using heading tags correctly, replacing <h1> with <h2> -->
                 <!-- This is a SEO Change : Descriptive <h1> tag- change from "stay on track" to "Track Your Spending Effectively" -->
                 <h2>Track Your Spending Effectively</h2>
@@ -48,62 +48,62 @@
                     you would get surprised! Proper budget management depends on real data... and this
                     app will help you with that!
                 </p>
-            </article>
+            </div>
     
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Alerts</h2>
                 <p>
                     What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
                 </p>
-            </article>
+            </div>
     
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Results</h2>
                 <p>
                     People who stick to a financial plan, budgeting every expense, get out of debt faster!
                     Also, they to live happier lives... since they expend without guilt or fear... 
                     because they know it is all good and accounted for.
                 </p>
-            </article>
+            </div>
     
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Free</h2>
                 <p>
                     This app is free!!! And you are the only one holding your data!
                 </p>
-            </article>
+            </div>
 
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Stay on track</h2>
                 <p>
                     Do you know where you are spending your money? If you really stop to track it down,
                     you would get surprised! Proper budget management depends on real data... and this
                     app will help you with that!
                 </p>
-            </article>
+            </div>
     
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Alerts</h2>
                 <p>
                     What if your clothing budget ended? You will get an alert. The goal is to never go over the budget.
                 </p>
-            </article>
+            </div>
     
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Results</h2>
                 <p>
                     People who stick to a financial plan, budgeting every expense, get out of debt faster!
                     Also, they to live happier lives... since they expend without guilt or fear... 
                     because they know it is all good and accounted for.
                 </p>
-            </article>
+            </div>
     
-            <article class="text-box">
+            <div class="text-box">
                 <h2>Free</h2>
                 <p>
                     This app is free!!! And you are the only one holding your data!
                 </p>
-            </article>
+            </div>
 
         </section>
 
