@@ -99,11 +99,21 @@
             </div>
     
             <div class="text-box">
-                <h2>Chart</h2>
-                <p>
+                <h2>Budget Chart</h2>
+                <div>
                     <canvas id="myChart" width="400" height="400"></canvas>
-                </p>
+                </div>
             </div>
+
+            <div class="chart-area center">
+                <h1>D3 Budget Chart</h1>
+                <button class="randomize">Refresh</button>
+            </div>
+
+            <div class="chart-area center">
+                <h1>D3 Budget Bar Chart</h1>
+                <div id="barChart"></div>
+            </div>            
 
         </section>
 
@@ -119,8 +129,10 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js" integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
 
     <script>
+        var advChartData = []
         var dataSource ={
             datasets:[
                 {
@@ -168,9 +180,11 @@
                     dataSource.datasets[0].data[i] = res.data.myBudget[i].budget;
                     dataSource.labels[i] = res.data.myBudget[i].title;
                 }
+                advChartData =  res.data.myBudget
                 dataSource.datasets[0].data = res.data.myBudget.map(item => item.budget);
                 dataSource.labels = res.data.myBudget.map(item => item.title);
                 createChart();
+                addAdvD3Chart();
             })
             .catch(function (error) {
                 console.error('Error fetching budget data:', error);
@@ -178,6 +192,178 @@
         }
 
         getBudget();
+
+    function addAdvD3Chart() {
+    var svgPie = d3.select(".chart-area")
+        .append("svg")
+        .append("g")
+
+    svgPie.append("g").attr("class", "slices");
+    svgPie.append("g").attr("class", "labels");
+    svgPie.append("g").attr("class", "lines");
+
+    var width = 700,
+        height = 400,
+        radius = Math.min(width, height) / 2;
+
+    var pie = d3.layout.pie()
+        .sort(null)
+        .value(function (d) {
+            return d.value;
+        });
+
+    var arc = d3.svg.arc()
+        .outerRadius(radius * 0.5)
+        .innerRadius(radius * 0.2);
+
+    var outerArc = d3.svg.arc()
+        .innerRadius(radius * 0.4)
+        .outerRadius(radius * 0.4);
+
+    svgPie.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+    var key = function (d) { return d.data.label; };
+
+    var color = d3.scale.ordinal()
+        .domain(dataSource.labels)
+        .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+
+    function randomData() {
+        return advChartData.map(function (budgetInfo) {
+            return { label: budgetInfo.title, value: budgetInfo.budget, color: color };
+        });
+    }
+
+    change(randomData());
+
+    d3.select(".randomize")
+        .on("click", function () {
+            change(randomData());
+        });
+
+    function change(data) {
+        var slice = svgPie.select(".slices").selectAll("path.slice")
+            .data(pie(data), key);
+
+        slice.enter()
+            .insert("path")
+            .style("fill", function (d) { return color(d.data.label); })
+            .attr("class", "slice");
+
+        slice.transition().duration(1000)
+            .attrTween("d", function (d) {
+                this._current = this._current || d;
+                var interpolate = d3.interpolate(this._current, d);
+                this._current = interpolate(0);
+                return function (t) {
+                    return arc(interpolate(t));
+                };
+            });
+
+        slice.exit().remove();
+
+        var text = svgPie.select(".labels").selectAll("text")
+            .data(pie(data), key);
+
+        text.enter()
+            .append("text")
+            .attr("dy", ".35em")
+            .text(function (d) { return d.data.label; });
+
+        function midAngle(d) {
+            return d.startAngle + (d.endAngle - d.startAngle) / 2;
+        }
+
+        text.transition().duration(1000)
+            .attrTween("transform", function (d) {
+                this._current = this._current || d;
+                var interpolate = d3.interpolate(this._current, d);
+                this._current = interpolate(0);
+                return function (t) {
+                    var d2 = interpolate(t);
+                    var pos = outerArc.centroid(d2);
+                    pos[0] = radius * (midAngle(d2) < Math.PI ? 1 : -1);
+                    return "translate(" + pos + ")";
+                };
+            })
+            .styleTween("text-anchor", function (d) {
+                this._current = this._current || d;
+                var interpolate = d3.interpolate(this._current, d);
+                this._current = interpolate(0);
+                return function (t) {
+                    var d2 = interpolate(t);
+                    return midAngle(d2) < Math.PI ? "start" : "end";
+                };
+            });
+
+        text.exit().remove();
+
+        var polyline = svgPie.select(".lines").selectAll("polyline")
+            .data(pie(data), key);
+
+        polyline.enter()
+            .append("polyline");
+
+        polyline.transition().duration(1000)
+            .attrTween("points", function (d) {
+                this._current = this._current || d;
+                var interpolate = d3.interpolate(this._current, d);
+                this._current = interpolate(0);
+                return function (t) {
+                    var d2 = interpolate(t);
+                    var pos = outerArc.centroid(d2);
+                    pos[0] = radius * 0.95 * (midAngle(d2) < Math.PI ? 1 : -1);
+                    return [arc.centroid(d2), outerArc.centroid(d2), pos];
+                };
+            });
+
+        polyline.exit().remove();
+    }
+
+    // Added D3 bar chart below
+    function createBarChart() {
+        var margin = { top: 10, right: 20, bottom: 30, left: 90 },
+            width = 500 - margin.left - margin.right,
+            height = 300 - margin.top - margin.bottom;
+
+        var svgBar = d3.select("#barChart").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        var x = d3.scale.linear()
+            .domain([0, d3.max(advChartData, function (d) { return d.budget; })])
+            .range([0, width]);
+
+        var y = d3.scale.ordinal()
+            .domain(advChartData.map(function (d) { return d.title; }))
+            .rangeRoundBands([0, height], .1);
+
+        svgBar.append("g")
+            .selectAll(".bar")
+            .data(advChartData)
+            .enter().append("rect")
+            .attr("class", "bar")
+            .attr("x", 0)
+            .attr("y", function (d) { return y(d.title); })
+            .attr("width", function (d) { return x(d.budget); })
+            .attr("height", y.rangeBand())
+            .attr("fill", function (d) { return color(d.title); });
+
+        svgBar.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.svg.axis().scale(x).orient("bottom"));
+
+        svgBar.append("g")
+            .attr("class", "y axis")
+            .call(d3.svg.axis().scale(y).orient("left"));
+    }
+
+    createBarChart(); // Call the bar chart creation
+}
+
     </script>
 </body>
 </html>
