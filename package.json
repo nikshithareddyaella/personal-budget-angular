@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/nikshithareddyaella/personal-budget#readme",
   "dependencies": {
-    "cors": "^2.8.5",
     "chart.js": "^4.4.4",
+    "cors": "^2.8.5",
     "express": "^4.21.0"
   }
 }

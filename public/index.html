@@ -7,8 +7,8 @@
     <title>Personal Budget Management App | Effortlessly Track and Optimize Your Finances</title>
     <!--This is a SEO Change : Added meta description -->
     <meta name="description" content="Manage your finances efficiently with our Personal Budget app. Track expenses, set alerts, and stay on budget to achieve financial freedom.">
-    <link rel="stylesheet" href="/reset.css">
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="main.css">
        </head>
 <body>
      <!-- This is an A11y Change : added skip to content -->
@@ -21,8 +21,8 @@
             <div class="menu"> 
             <ul class="ultop">
                 <li><a href="/" aria-label="Go to Homepage">Homepage</a></li>
-                <li><a href="/about.html" aria-label="Learn more About us">About</a></li>
-                <li><a href="/login.html" aria-label="Login to your account">Login</a></li>
+                <li><a href="about.html" aria-label="Learn more About us">About</a></li>
+                <li><a href="login.html" aria-label="Login to your account">Login</a></li>
                 <li><a href="https://google.com" aria-label="Visit Google">Google</a></li>
             </ul>
             </div>
@@ -173,7 +173,7 @@
         }
 
         function getBudget(){
-            axios.get('/budget')
+            axios.get('http://localhost:3000/budget')
             .then(function (res) {
                 console.log(res);
                 for(var i =0; i< res.data.myBudget.length; i++){
