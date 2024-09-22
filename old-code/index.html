@@ -160,12 +160,10 @@
 
         function createChart(){
            var ctx = document.getElementById("myChart").getContext("2d");
-
            // Check if there is an existing chart and destroy it
         if (myPieChart) {
             myPieChart.destroy();
         }
-
             var myPieChart = new Chart(ctx, {
                 type: 'pie',
                 data: dataSource
