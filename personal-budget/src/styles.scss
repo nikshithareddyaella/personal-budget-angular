@@ -360,28 +360,7 @@ template {
 
 
 
-/* This is an A11y Change: Skip to content link */
-.skip-to-content {
-  position: static;
-  top: auto;
-  left: 1px;;
-  background-color: rgb(200, 244, 119);
-  color: blue;
 
-  z-index: 100;
-  text-decoration: none;
-  font-size: 15px;
-  overflow: hidden;
-
-}
-
-/* Show skip link when focused */
-.skip-to-content:focus {
-  top: 10px; /* Add 'px' to top value */
-      position: static;
-      width: auto;
-      height: auto;
-}
 
 
 * {
@@ -391,42 +370,6 @@ template {
 body {
   font-size: 10px;
   font-family: Tahoma, Arial;
-}
-
-div.menu {
-  width: 100%;
-  background-color: #4d5791;
-  height: 44px;
-  padding: 0 40px;
-}
-/* This is an A11y change: making nav bar from list to horizontal alignment, increased font size*/
-.ultop li{
-  display: inline-block;
-  font-size: 12px;
-  padding: 10px;
-}
-div.menu ul,
-div.menu ul li {
-  margin: 0;
-  padding: 0px;
-  list-style: none;
-  display: inline-block;
-}
-
-div.menu ul li a {
-/*  display: block;*/
-  padding: 0 40px;
-  line-height: 44px;
-  font-size: 1.4em;
-  text-decoration: none;
-  color: #fff;
-  margin: 0;
-
-}
-
-div.menu ul li a:hover  {
-  background-color: white;
-  color: #4d5791;
 }
 
 div.hero {
@@ -506,9 +449,4 @@ stroke-width: 2px;
 fill: none;
 }
 
-.chart-area {
-width: 960px;
-height: 500px;
-position: relative;
-text-align: center;
-}
+

@@ -1,0 +1,21 @@
+.contact-container {
+  padding: 20px;
+  h2 {
+    font-size: 2em;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    input, textarea {
+      margin: 10px 0;
+      padding: 10px;
+    }
+    button {
+      padding: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+  }
+}

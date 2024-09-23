@@ -1,0 +1,22 @@
+/* This is an A11y Change: Skip to content link */
+.skip-to-content {
+  position: static;
+  top: auto;
+  left: 1px;;
+  background-color: rgb(200, 244, 119);
+  color: blue;
+
+  z-index: 100;
+  text-decoration: none;
+  font-size: 15px;
+  overflow: hidden;
+
+}
+
+/* Show skip link when focused */
+.skip-to-content:focus {
+  top: 10px; /* Add 'px' to top value */
+      position: static;
+      width: auto;
+      height: auto;
+}

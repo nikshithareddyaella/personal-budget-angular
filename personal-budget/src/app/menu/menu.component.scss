@@ -1,0 +1,35 @@
+div.menu {
+  width: 100%;
+  background-color: #4d5791;
+  height: 44px;
+  padding: 0 40px;
+}
+/* This is an A11y change: making nav bar from list to horizontal alignment, increased font size*/
+.ultop li{
+  display: inline-block;
+  font-size: 12px;
+  padding: 10px;
+}
+div.menu ul,
+div.menu ul li {
+  margin: 0;
+  padding: 0px;
+  list-style: none;
+  display: inline-block;
+}
+
+div.menu ul li a {
+/*  display: block;*/
+  padding: 0 40px;
+  line-height: 44px;
+  font-size: 1.4em;
+  text-decoration: none;
+  color: #fff;
+  margin: 0;
+
+}
+
+div.menu ul li a:hover  {
+  background-color: white;
+  color: #4d5791;
+}

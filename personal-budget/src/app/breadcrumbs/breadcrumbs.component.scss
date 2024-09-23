@@ -1,0 +1,33 @@
+.breadcrumb {
+  display: flex;
+  justify-content: flex-start;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  flex-wrap: wrap; /* Allow breadcrumbs to wrap to the next line if necessary */
+
+  .breadcrumb-item {
+    font-size: 18px; /* Text size adjustment */
+    color: #007bff;
+    white-space: nowrap; /* Prevent breaking in the middle of breadcrumb items */
+    overflow: hidden; /* Prevent text from overflowing outside its container */
+    text-overflow: ellipsis; /* Add ellipsis if the text is too long */
+    max-width: 100%; /* Ensure breadcrumb items fit within their container */
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    &.active {
+      font-weight: bold;
+      color: #6c757d;
+    }
+
+    &:not(:last-child)::after {
+      content: ' / '; /* Separator between breadcrumb items */
+      margin: 0 5px;
+      color: #6c757d;
+    }
+  }
+}
